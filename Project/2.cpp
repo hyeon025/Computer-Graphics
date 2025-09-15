@@ -21,7 +21,7 @@ float c_b = 1.0f, c_r = 1.0f, c_g = 0.5f;
 float color[4][3] = { { 1,0,0 }, { 0,1,0 }, { 0,0,1 }, { 1,1,0 } };
 
 struct Rect {
-	float left, right, top, bottom;
+	float left, right, bottom, top;
 };
 
 Rect rect[4] = {
@@ -61,7 +61,7 @@ GLvoid drawScene()
 
 	for (size_t i = 0; i < 4; i++) {
 		glColor3fv(color[i]);
-		glRectf(rect[i].left, rect[i].top, rect[i].right, rect[i].bottom);
+		glRectf(rect[i].left, rect[i].bottom, rect[i].right, rect[i].top);
 	}
 
 	glutSwapBuffers();	//화면 출력
@@ -79,7 +79,7 @@ GLvoid Mouse(int button, int state, int x, int y) {
 		bool inrectL = false;
 		for (size_t i = 0; i < 4; i++)
 		{
-			if (rect[i].left < ndcX && rect[i].right > ndcX && rect[i].top < ndcY && rect[i].bottom > ndcY) {
+			if (rect[i].left < ndcX && rect[i].right > ndcX && rect[i].bottom < ndcY && rect[i].top > ndcY) {
 				for (size_t j = 0; j < 3; j++) {
 					color[i][j] = ran(dre);
 				}
@@ -101,11 +101,11 @@ GLvoid Mouse(int button, int state, int x, int y) {
 
 		for (size_t i = 0; i < 4; i++)
 		{
-			if (rect[i].left < ndcX && rect[i].right > ndcX && rect[i].top < ndcY && rect[i].bottom > ndcY) {
+			if (rect[i].left < ndcX && rect[i].right > ndcX && rect[i].bottom < ndcY && rect[i].top > ndcY) {
 				rect[i].left += 0.1f;
 				rect[i].right -= 0.1f;
-				rect[i].top += 0.1f;
-				rect[i].bottom -= 0.1f;
+				rect[i].bottom += 0.1f;
+				rect[i].top -= 0.1f;
 				inrectR = true;
 
 				break;
@@ -115,26 +115,26 @@ GLvoid Mouse(int button, int state, int x, int y) {
 			if (ndcX <= 0.0f && ndcY <= 0.0f) {
 				rect[0].left -= 0.1f;
 				rect[0].right += 0.1f;
-				rect[0].top -= 0.1f;
-				rect[0].bottom += 0.1f;
+				rect[0].bottom -= 0.1f;
+				rect[0].top += 0.1f;
 			}
 			else if (ndcX >= 0.0f && ndcY <= 0.0f) {
 				rect[1].left -= 0.1f;
 				rect[1].right += 0.1f;
-				rect[1].top -= 0.1f;
-				rect[1].bottom += 0.1f;
+				rect[1].bottom -= 0.1f;
+				rect[1].top += 0.1f;
 			}
 			else if (ndcX <= 0.0f && ndcY >= 0.0f) {
 				rect[2].left -= 0.1f;
 				rect[2].right += 0.1f;
-				rect[2].top -= 0.1f;
-				rect[2].bottom += 0.1f;
+				rect[2].bottom -= 0.1f;
+				rect[2].top += 0.1f;
 			}
 			else if (ndcX >= 0.0f && ndcY >= 0.0f) {
 				rect[3].left -= 0.1f;
 				rect[3].right += 0.1f;
-				rect[3].top -= 0.1f;
-				rect[3].bottom += 0.1f;
+				rect[3].bottom -= 0.1f;
+				rect[3].top += 0.1f;
 			}
 		}
 	}
